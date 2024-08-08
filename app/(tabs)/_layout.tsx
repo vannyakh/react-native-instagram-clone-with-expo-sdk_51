@@ -1,19 +1,12 @@
-import React from 'react';
-import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { Link, Tabs } from 'expo-router';
-import { Pressable } from 'react-native';
+import React from "react";
+import FontAwesome from "@expo/vector-icons/FontAwesome";
+import { Link, Tabs } from "expo-router";
+import { Image, Pressable } from "react-native";
 
-import Colors from '@/constants/Colors';
-import { useColorScheme } from '@/components/useColorScheme';
-import { useClientOnlyValue } from '@/components/useClientOnlyValue';
-
-// You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
-function TabBarIcon(props: {
-  name: React.ComponentProps<typeof FontAwesome>['name'];
-  color: string;
-}) {
-  return <FontAwesome size={28} style={{ marginBottom: -3 }} {...props} />;
-}
+import Colors from "@/constants/Colors";
+import { useColorScheme } from "@/components/useColorScheme";
+import { useClientOnlyValue } from "@/components/useClientOnlyValue";
+import { View } from "@/components/Themed";
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
@@ -21,43 +14,84 @@ export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
+        tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
         headerShown: useClientOnlyValue(false, true),
-      }}>
+        tabBarShowLabel: false,
+      
+      }}
+    >
       <Tabs.Screen
         name="index"
         options={{
-          headerShown:false,
-          title: 'Home',
-          tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
+          headerShown: false,
+          title: "Home",
+          tabBarIcon: ({ color, size, focused }) => (
+            <Image
+              source={
+                focused
+                  ? require("@/assets/images/icons/home_activ.png")
+                  : require("@/assets/images/icons/home.png")
+              }
+              style={{ width: 24, height: 24 }}
+            />
+          ),
         }}
       />
       <Tabs.Screen
         name="search"
         options={{
-          title: 'Search',
-          tabBarIcon: ({ color }) => <TabBarIcon name="search" color={color} />,
+          title: "Search",
+          tabBarIcon: ({ color, size, focused }) => (
+            <Image
+              source={focused
+                ? require("@/assets/images/icons/explo_activ.png")
+                : require("@/assets/images/icons/explo.png")
+              }
+              style={{ width: 24, height: 24 }}
+            />
+          ),
         }}
       />
       <Tabs.Screen
         name="add"
         options={{
-          title: 'Add',
-          tabBarIcon: ({ color }) => <TabBarIcon name="plus" color={color} />,
+          title: "Add",
+          tabBarIcon: ({ color, size, focused }) => (
+            <Image
+              source={require("@/assets/images/icons/add.png")}
+              style={{ width: 24, height: 24 }}
+            />
+          ),
         }}
       />
       <Tabs.Screen
         name="reels"
         options={{
-          title: 'Reels',
-          tabBarIcon: ({ color }) => <TabBarIcon name="film" color={color} />,
+          title: "Reels",
+          tabBarIcon: ({ color, size, focused }) => (
+            <Image
+              source={
+                focused
+                  ? require("@/assets/images/icons/reels_activ.png")
+                  : require("@/assets/images/icons/reels.png")
+              }
+              style={{ width: 24, height: 24 }}
+            />
+          ),
         }}
       />
       <Tabs.Screen
         name="account"
         options={{
-          title: 'Account',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          title: "Account",
+          tabBarIcon: ({ color, size, focused }) => (
+            <View style={{ position: "relative",borderRadius:24/2,overflow:'hidden',borderColor:Colors[colorScheme ?? 'light'].tint ,borderWidth:1}}>
+              <Image
+                source={require("@/assets/images/avatars/avata-1.jpg")}
+                style={{ width: 24, height: 24 }}
+              />
+            </View>
+          ),
         }}
       />
     </Tabs>
