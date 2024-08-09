@@ -14,7 +14,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { useColorScheme } from "@/components/useColorScheme";
 import Colors from "@/constants/Colors";
 import { FontAwesome } from "@expo/vector-icons";
-// import DropdownMenu from "@/components/dropdown-menu";
+import DropdownMenu from "@/components/dropdown-menu"; 
 import { router } from "expo-router";
 import { useRef } from "react";
 import LottieView from "lottie-react-native";
@@ -240,14 +240,14 @@ export default function Home() {
                   }}
                 >
                   <Image
-                    source={require("@/assets/images/avatars/avata-1.jpg")}
+                    source={require("@/assets/images/avatars/avata-2.jpg")}
                     style={{ width: 40, height: 40, borderRadius: 20 }}
                   />
                   <View>
                     <View>
                       <Text style={{ marginHorizontal: 10 }}>
                         <Text style={{ fontWeight: "bold" }}>
-                          {"SoKeang(IT)"}
+                          {"saanitaaa97"}
                         </Text>
                         <Text>{" 1h"}</Text>
                       </Text>
@@ -255,7 +255,7 @@ export default function Home() {
                   </View>
                 </View>
                 <View>
-                  {/* <DropdownMenu onSelect={headleMenu} items={menus} /> */}
+                  <DropdownMenu onSelect={headleMenu} items={menus} />
                 </View>
               </View>
               <View style={styles.imagePost}>
@@ -273,8 +273,8 @@ export default function Home() {
                     /> */}
                   </View>
                   <Image
-                    source={require("@/assets/images/posts/post-2.jpg")}
-                    style={{ width: "100%", height: 300 }}
+                    source={require("@/assets/images/posts/post-6.jpg")}
+                    style={{ width: "100%", height: 400 }}
                   />
                 </TouchableOpacity>
               </View>
@@ -387,7 +387,7 @@ const styles = StyleSheet.create({
   },
   imagePost: {
     width: "100%",
-    height: 300,
+    height: 400,
     borderRadius: 10,
     overflow: "hidden",
     marginVertical: 10,

@@ -1,0 +1,1 @@
+npm i zeego react-native-ios-context-menu react-native-ios-utilities @react-native-menu/menu
