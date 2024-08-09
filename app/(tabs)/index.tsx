@@ -112,7 +112,10 @@ export default function Home() {
   };
   
   return (
-    <SafeAreaView style={[styles.container]}>
+    <View style={[styles.container]}>
+    <SafeAreaView 
+      edges={["top"]}
+    >
       {/* header */}
       <View style={styles.headerTop}>
         {/* logo left */}
@@ -136,6 +139,7 @@ export default function Home() {
           </TouchableOpacity>
         </View>
       </View>
+      </SafeAreaView>
       {/* body */}
       <ScrollView
         style={[styles.container]}
@@ -324,7 +328,9 @@ export default function Home() {
           ))}
         </View>
       </ScrollView>
-    </SafeAreaView>
+    
+    </View>
+
   );
 }
 
