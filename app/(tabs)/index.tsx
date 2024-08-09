@@ -96,7 +96,6 @@ export default function Home() {
         useNativeDriver: true,
       }),
     ]).start();
-    
   };
 
   const handleDoubleTap = () => {
@@ -247,11 +246,15 @@ export default function Home() {
                   </View>
                 </View>
                 <View>
-                  <DropdownMenu onSelect={headleMenu} items={menus} />
+                  {/* <DropdownMenu onSelect={headleMenu} items={menus} /> */}
                 </View>
               </View>
               <View style={styles.imagePost}>
-                <TouchableOpacity activeOpacity={1} onPress={handleDoubleTap}>
+                <TouchableOpacity
+                  style={{ position: "relative" }}
+                  activeOpacity={1}
+                  onPress={handleDoubleTap}
+                >
                   <Image
                     source={require("@/assets/images/posts/post-2.jpg")}
                     style={{ width: "100%", height: 300 }}
@@ -367,5 +370,15 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     overflow: "hidden",
     marginVertical: 10,
+  },
+  loveLottis: {
+    position: "absolute",
+    width: "100%",
+    height: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+    zIndex: 1,
+    top: 0,
+    backgroundColor: "transparent",
   },
 });
