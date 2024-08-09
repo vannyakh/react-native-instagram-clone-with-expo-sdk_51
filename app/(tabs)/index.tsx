@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   RefreshControl,
   Animated,
+  useWindowDimensions,
 } from "react-native";
 import { Text, View } from "@/components/Themed";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -13,14 +14,17 @@ import { LinearGradient } from "expo-linear-gradient";
 import { useColorScheme } from "@/components/useColorScheme";
 import Colors from "@/constants/Colors";
 import { FontAwesome } from "@expo/vector-icons";
-import DropdownMenu from "@/components/dropdown-menu";
+// import DropdownMenu from "@/components/dropdown-menu";
 import { router } from "expo-router";
 import { useRef } from "react";
+import LottieView from "lottie-react-native";
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 export default function Home() {
   const colorScheme = useColorScheme();
   const bounceValue = useRef(new Animated.Value(1)).current;
   const lastTapTimeRef = useRef(0);
+  const {width, height} = useWindowDimensions();
 
   const headleMenu = (e: string) => {
     switch (e) {
@@ -106,6 +110,7 @@ export default function Home() {
       lastTapTimeRef.current = now;
     }
   };
+  
   return (
     <SafeAreaView style={[styles.container]}>
       {/* header */}
@@ -255,6 +260,14 @@ export default function Home() {
                   activeOpacity={1}
                   onPress={handleDoubleTap}
                 >
+                  <View style={styles.loveLottis}>
+                    {/* <LottieView
+                      source={require("@/assets/lotties/love_3.json")}
+                      autoPlay={true}
+                      loop={true}
+                      style={{ width: 200, height: 200 }}
+                    /> */}
+                  </View>
                   <Image
                     source={require("@/assets/images/posts/post-2.jpg")}
                     style={{ width: "100%", height: 300 }}
@@ -319,6 +332,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "white",
+    maxWidth: 600,
+    marginHorizontal: "auto",
   },
   headerTop: {
     paddingHorizontal: 16,
@@ -377,7 +392,7 @@ const styles = StyleSheet.create({
     height: "100%",
     justifyContent: "center",
     alignItems: "center",
-    zIndex: 1,
+    zIndex: 2,
     top: 0,
     backgroundColor: "transparent",
   },
