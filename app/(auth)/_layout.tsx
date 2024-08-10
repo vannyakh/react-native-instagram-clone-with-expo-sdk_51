@@ -22,6 +22,31 @@ const AuthLayout = () => {
           headerShown: false,
         }}
       />
+      <Stack.Screen
+        name="registers/phoneSignup"
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="registers/createUsername"
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="registers/createPassword"
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="registers/verify"
+        options={{
+          headerShown: false,
+        }}
+      />
+
     </Stack>
   );
 };

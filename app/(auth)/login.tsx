@@ -61,6 +61,7 @@ const Login = () => {
                 borderColor: Colors[colorScheme ?? "light"].tabIconDefault,
                 borderWidth: 1,
               }}
+            autoFocus={true}
             />
           </View>
           {/* input file */}
@@ -135,9 +136,7 @@ const Login = () => {
           </View>
         </View>
         {/* end */}
-        <View 
-          style={styles.styleEnd}
-        >
+        <View style={styles.styleEnd}>
           <TouchableHighlight
             style={{
               paddingVertical: 16,
@@ -147,7 +146,7 @@ const Login = () => {
             }}
             underlayColor={Colors[colorScheme ?? "light"].defaultButton}
             onPress={() => {
-              router.push("/(auth)/registers/emailSignup");
+              router.push("/(auth)/registers/phoneSignup");
             }}
           >
             <Text
@@ -161,7 +160,6 @@ const Login = () => {
               Create New Account
             </Text>
           </TouchableHighlight>
-            
         </View>
       </SafeAreaView>
     </View>
