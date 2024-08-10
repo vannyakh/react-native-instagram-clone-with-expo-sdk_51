@@ -17,7 +17,6 @@ export default function TabLayout() {
         tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
         headerShown: useClientOnlyValue(false, true),
         tabBarShowLabel: false,
-      
       }}
     >
       <Tabs.Screen
@@ -43,9 +42,10 @@ export default function TabLayout() {
           title: "Search",
           tabBarIcon: ({ color, size, focused }) => (
             <Image
-              source={focused
-                ? require("@/assets/images/icons/explo_activ.png")
-                : require("@/assets/images/icons/explo.png")
+              source={
+                focused
+                  ? require("@/assets/images/icons/explo_activ.png")
+                  : require("@/assets/images/icons/explo.png")
               }
               style={{ width: 24, height: 24 }}
             />
@@ -84,8 +84,17 @@ export default function TabLayout() {
         name="account"
         options={{
           title: "Account",
+          headerShown: false,
           tabBarIcon: ({ color, size, focused }) => (
-            <View style={{ position: "relative",borderRadius:24/2,overflow:'hidden',borderColor:Colors[colorScheme ?? 'light'].tint ,borderWidth:1}}>
+            <View
+              style={{
+                position: "relative",
+                borderRadius: 24 / 2,
+                overflow: "hidden",
+                borderColor: Colors[colorScheme ?? "light"].tint,
+                borderWidth: focused ? 1 : 0,
+              }}
+            >
               <Image
                 source={require("@/assets/images/avatars/avata-1.jpg")}
                 style={{ width: 24, height: 24 }}

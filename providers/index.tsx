@@ -1,17 +1,15 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import { BottomSheetModalProvider } from '@gorhom/bottom-sheet'
+import { StyleSheet, Text, View } from "react-native";
+import React from "react";
+import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 
-const AppProvider = (
-    { children }: { children: React.ReactNode }
-) => {
+const AppProvider = ({ children }: { children: React.ReactNode }) => {
   return (
-    <BottomSheetModalProvider>
-        {children}
-    </BottomSheetModalProvider>
-  )
-}
+    <>
+      <BottomSheetModalProvider>{children}</BottomSheetModalProvider>
+    </>
+  );
+};
 
-export default AppProvider
+export default AppProvider;
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({});

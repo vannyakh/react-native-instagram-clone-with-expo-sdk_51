@@ -7,6 +7,7 @@ import {
   RefreshControl,
   Animated,
   useWindowDimensions,
+  Platform,
 } from "react-native";
 import { Text, View } from "@/components/Themed";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -14,17 +15,21 @@ import { LinearGradient } from "expo-linear-gradient";
 import { useColorScheme } from "@/components/useColorScheme";
 import Colors from "@/constants/Colors";
 import { FontAwesome } from "@expo/vector-icons";
-import DropdownMenu from "@/components/dropdown-menu"; 
+import DropdownMenu from "@/components/dropdown-menu";
 import { router } from "expo-router";
 import { useRef } from "react";
 import LottieView from "lottie-react-native";
-import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
+import { GlobleStyle } from "@/constants/GlobleStyle";
 
 export default function Home() {
   const colorScheme = useColorScheme();
   const bounceValue = useRef(new Animated.Value(1)).current;
   const lastTapTimeRef = useRef(0);
-  const {width, height} = useWindowDimensions();
+  const { width, height } = useWindowDimensions();
 
   const headleMenu = (e: string) => {
     switch (e) {
@@ -110,35 +115,33 @@ export default function Home() {
       lastTapTimeRef.current = now;
     }
   };
-  
+
   return (
     <View style={[styles.container]}>
-    <SafeAreaView 
-      edges={["top"]}
-    >
-      {/* header */}
-      <View style={styles.headerTop}>
-        {/* logo left */}
-        <Image
-          source={require("@/assets/images/icons/ig_logo.png")}
-          style={{ width: 120, height: 34, resizeMode: "contain" }}
-        />
-        {/* action right */}
-        <View style={styles.actioneRight}>
-          <TouchableOpacity>
-            <Image
-              source={require("@/assets/images/icons/love.png")}
-              style={{ width: 26, height: 26, resizeMode: "contain" }}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Image
-              source={require("@/assets/images/icons/chat.png")}
-              style={{ width: 26, height: 26, resizeMode: "contain" }}
-            />
-          </TouchableOpacity>
+      <SafeAreaView edges={["top"]}>
+        {/* header */}
+        <View style={styles.headerTop}>
+          {/* logo left */}
+          <Image
+            source={require("@/assets/images/icons/ig_logo.png")}
+            style={{ width: 120, height: 34, resizeMode: "contain" }}
+          />
+          {/* action right */}
+          <View style={styles.actioneRight}>
+            <TouchableOpacity>
+              <Image
+                source={require("@/assets/images/icons/love.png")}
+                style={{ width: 26, height: 26, resizeMode: "contain" }}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity>
+              <Image
+                source={require("@/assets/images/icons/chat.png")}
+                style={{ width: 26, height: 26, resizeMode: "contain" }}
+              />
+            </TouchableOpacity>
+          </View>
         </View>
-      </View>
       </SafeAreaView>
       {/* body */}
       <ScrollView
@@ -156,63 +159,76 @@ export default function Home() {
         <ScrollView
           horizontal
           showsHorizontalScrollIndicator={false}
-          style={{ paddingVertical: 10, paddingHorizontal: 16 }}
+          style={{
+            paddingVertical: 4,
+            borderBlockColor: "#f4f4f4",
+            borderBottomWidth: 1,
+          }}
         >
-          <TouchableOpacity
-            style={{ alignItems: "center", marginHorizontal: 4 }}
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              gap: 10,
+              paddingHorizontal: 16,
+            }}
           >
-            <View
-              style={[
-                styles.myStory,
-                { borderColor: Colors[colorScheme ?? "light"].tint },
-              ]}
-            >
-              <Image
-                source={require("@/assets/images/avatars/avata-1.jpg")}
-                style={{ width: "100%", height: "100%", borderRadius: 30 }}
-              />
-              <Pressable
-                style={{
-                  position: "absolute",
-                  bottom: -4,
-                  right: -2,
-                  backgroundColor: Colors[colorScheme ?? "light"].tint,
-                  borderRadius: 50,
-                  height: 20,
-                  width: 20,
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
+            <TouchableOpacity style={{ alignItems: "center" }}>
+              <View
+                style={[
+                  styles.myStory,
+                  { borderColor: Colors[colorScheme ?? "light"].tint },
+                ]}
               >
-                <FontAwesome name="plus" size={12} color="#fff" />
-              </Pressable>
-            </View>
-            <Text style={[styles.storyLabel, { color: "#999" }]}>story</Text>
-          </TouchableOpacity>
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((item, index) => (
-            <TouchableOpacity
-              style={{ alignItems: "center", marginHorizontal: 4 }}
-              key={index}
-            >
-              <LinearGradient
-                colors={["#FF5B5B", "#FFC530"]}
-                style={{
-                  padding: 1.5,
-                  borderRadius: 30,
-                }}
-              >
-                <View style={[styles.story, { borderColor: "#fff" }]}>
-                  <Image
-                    source={require("@/assets/images/avatars/avata-1.jpg")}
-                    style={{ width: "100%", height: "100%", borderRadius: 30 }}
-                  />
-                </View>
-              </LinearGradient>
-              <Text style={[styles.storyLabel, { color: "#999" }]}>
-                user{index}
-              </Text>
+                <Image
+                  source={require("@/assets/images/avatars/avata-1.jpg")}
+                  style={{ width: "100%", height: "100%", borderRadius: 30 }}
+                />
+                <Pressable
+                  style={{
+                    position: "absolute",
+                    bottom: -4,
+                    right: -2,
+                    backgroundColor: Colors[colorScheme ?? "light"].tint,
+                    borderRadius: 50,
+                    height: 20,
+                    width: 20,
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <FontAwesome name="plus" size={13} color="#fff" />
+                </Pressable>
+              </View>
+              <Text style={[styles.storyLabel, { color: "#999" }]}>story</Text>
             </TouchableOpacity>
-          ))}
+            {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((item, index) => (
+              <TouchableOpacity style={{ alignItems: "center" }} key={index}>
+                <LinearGradient
+                  colors={["#C913B9","#F9373F", "#FECD00"]}
+                  end={{ x: 0.1, y: 1 }}
+                  style={{
+                    padding: 1.5,
+                    borderRadius: 30,
+                  }}
+                >
+                  <View style={[styles.story, { borderColor: "#fff" }]}>
+                    <Image
+                      source={require("@/assets/images/avatars/avata-1.jpg")}
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        borderRadius: 30,
+                      }}
+                    />
+                  </View>
+                </LinearGradient>
+                <Text style={[styles.storyLabel, { color: "#999" }]}>
+                  user{index}
+                </Text>
+              </TouchableOpacity>
+            ))}
+          </View>
         </ScrollView>
         {/* post */}
         <View
@@ -244,18 +260,34 @@ export default function Home() {
                     style={{ width: 40, height: 40, borderRadius: 20 }}
                   />
                   <View>
-                    <View>
+                    <View
+                      style={{ alignItems: "center", flexDirection: "row" }}
+                    >
                       <Text style={{ marginHorizontal: 10 }}>
                         <Text style={{ fontWeight: "bold" }}>
                           {"saanitaaa97"}
                         </Text>
                         <Text>{" 1h"}</Text>
                       </Text>
+                      <Pressable>
+                        <Text
+                          style={[
+                            GlobleStyle.folloBtn,
+                            {
+                              color: Colors[colorScheme ?? "light"].tint,
+                            },
+                          ]}
+                        >
+                          {"Follow"}
+                        </Text>
+                      </Pressable>
                     </View>
                   </View>
                 </View>
                 <View>
-                  <DropdownMenu onSelect={headleMenu} items={menus} />
+                  {Platform.OS === "ios" && (
+                    <DropdownMenu onSelect={headleMenu} items={menus} />
+                  )}
                 </View>
               </View>
               <View style={styles.imagePost}>
@@ -328,9 +360,7 @@ export default function Home() {
           ))}
         </View>
       </ScrollView>
-    
     </View>
-
   );
 }
 
