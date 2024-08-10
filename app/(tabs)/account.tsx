@@ -1,14 +1,15 @@
 import {
+  Button,
   Image,
+  Modal,
   Pressable,
   RefreshControl,
   ScrollView,
   StyleSheet,
-  Text,
   TouchableOpacity,
-  View,
 } from "react-native";
-import React from "react";
+import { Text, View } from "@/components/Themed";
+import React, { useCallback, useMemo, useRef } from "react";
 import { GlobleStyle } from "@/constants/GlobleStyle";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Colors from "@/constants/Colors";
@@ -20,15 +21,63 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 import { linearNumberFormat } from "@/helper/formart";
+import {
+  BottomSheetBackdrop,
+  BottomSheetModal,
+  BottomSheetView,
+} from "@gorhom/bottom-sheet";
+import { router } from "expo-router";
 
 const Account = () => {
   const colorScheme = useColorScheme();
+
+  // ref
+  const bottomSheetModalRef = useRef<BottomSheetModal>(null);
+  const menuSheetRef = useRef<BottomSheetModal>(null);
+
+  // variables
+  const snapPoints = useMemo(() => ["45%"], []);
+  const snapPointsMenu = useMemo(() => ["60%"], []);
+
+  // callbacks
+  const handlePresentModalPress = useCallback(() => {
+    bottomSheetModalRef.current?.present();
+  }, []);
+  const handlePresentMenuPress = useCallback(() => {
+    menuSheetRef.current?.present();
+  }, []);
+
+  // close model
+  const handleCloseModalPress = useCallback(() => {
+    bottomSheetModalRef.current?.dismiss();
+  }, []);
+  const handleCloseMenuPress = useCallback(() => {
+    menuSheetRef.current?.dismiss();
+  }, []);
+
+  const handleSheetChanges = useCallback((index: number) => {
+    console.log("handleSheetChanges", index);
+  }, []);
+
+  // render
+  const renderBackdrop = (props: any) => (
+    <BottomSheetBackdrop
+      {...props}
+      disappearsOnIndex={-1}
+      appearsOnIndex={0}
+      opacity={0.5}
+    />
+  );
+
   return (
     <View style={[GlobleStyle.container]}>
       {/* Header */}
       <SafeAreaView edges={["top"]}>
         <View style={[GlobleStyle.headerTop]}>
-          <Pressable style={[{ flexDirection: "row", alignItems: "center" }]}>
+          <Pressable
+            onPress={handlePresentModalPress}
+            style={[{ flexDirection: "row", alignItems: "center" }]}
+          >
             <Text style={[{ fontSize: 20, fontWeight: "600" }]}>Account</Text>
             <MaterialIcons name="keyboard-arrow-down" size={24} color="black" />
           </Pressable>
@@ -44,6 +93,7 @@ const Account = () => {
               />
             </Pressable>
             <Pressable
+              onPress={handlePresentMenuPress}
               style={{
                 marginLeft: 16,
                 position: "relative",
@@ -206,7 +256,46 @@ const Account = () => {
             </TouchableOpacity>
           </View>
         </View>
+        {/* My post */}
+        <View
+          style={{
+            flex: 1,
+          }}
+        ></View>
       </ScrollView>
+
+      {/* Modal Menu */}
+      <BottomSheetModal
+        ref={menuSheetRef}
+        index={0}
+        backdropComponent={renderBackdrop}
+        snapPoints={snapPointsMenu}
+      >
+        <BottomSheetView style={styles.contentContainer}>
+          <Text>Awesome 🎉</Text>
+          <Pressable
+            onPress={() => {
+              router.push({ pathname: "/(auth)/login" });
+              handleCloseMenuPress();
+            }}
+          >
+            <Text>Login</Text>
+          </Pressable>
+        </BottomSheetView>
+      </BottomSheetModal>
+
+      {/* Account sheet */}
+      <BottomSheetModal
+        ref={bottomSheetModalRef}
+        index={0}
+        backdropComponent={renderBackdrop}
+        snapPoints={snapPoints}
+        onChange={handleSheetChanges}
+      >
+        <BottomSheetView style={styles.contentContainer}>
+          <Text>Awesome 🎉</Text>
+        </BottomSheetView>
+      </BottomSheetModal>
     </View>
   );
 };
@@ -228,5 +317,11 @@ const styles = StyleSheet.create({
     fontSize: 14,
     marginTop: 4,
     color: "gray",
+  },
+  contentContainer: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "white",
   },
 });

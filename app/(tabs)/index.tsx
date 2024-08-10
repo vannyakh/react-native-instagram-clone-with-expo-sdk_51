@@ -134,7 +134,13 @@ export default function Home() {
                 style={{ width: 26, height: 26, resizeMode: "contain" }}
               />
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                router.push({
+                  pathname: "/chat",
+                });
+              }}
+            >
               <Image
                 source={require("@/assets/images/icons/chat.png")}
                 style={{ width: 26, height: 26, resizeMode: "contain" }}
@@ -161,8 +167,8 @@ export default function Home() {
           showsHorizontalScrollIndicator={false}
           style={{
             paddingVertical: 4,
-            borderBlockColor: "#f4f4f4",
             borderBottomWidth: 1,
+            borderBottomColor: Colors[colorScheme ?? "light"].defaultButton,
           }}
         >
           <View
@@ -205,7 +211,7 @@ export default function Home() {
             {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((item, index) => (
               <TouchableOpacity style={{ alignItems: "center" }} key={index}>
                 <LinearGradient
-                  colors={["#C913B9","#F9373F", "#FECD00"]}
+                  colors={["#C913B9", "#F9373F", "#FECD00"]}
                   end={{ x: 0.1, y: 1 }}
                   style={{
                     padding: 1.5,
@@ -285,9 +291,7 @@ export default function Home() {
                   </View>
                 </View>
                 <View>
-                  {Platform.OS === "ios" && (
-                    <DropdownMenu onSelect={headleMenu} items={menus} />
-                  )}
+                  <DropdownMenu onSelect={headleMenu} items={menus} />
                 </View>
               </View>
               <View style={styles.imagePost}>

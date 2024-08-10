@@ -63,6 +63,14 @@ function RootLayoutNav() {
             name="(share)/[share]"
             options={{ presentation: "modal", headerShown: false }}
           />
+          <Stack.Screen
+            name="chat"
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="(auth)"
+            options={{ headerShown: false }}
+          />
         </Stack>
       </AppProvider>
     </ThemeProvider>

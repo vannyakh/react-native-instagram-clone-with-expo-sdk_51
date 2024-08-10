@@ -1,11 +1,14 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 const AppProvider = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
-      <BottomSheetModalProvider>{children}</BottomSheetModalProvider>
+      <GestureHandlerRootView>
+        <BottomSheetModalProvider>{children}</BottomSheetModalProvider>
+      </GestureHandlerRootView>
     </>
   );
 };
