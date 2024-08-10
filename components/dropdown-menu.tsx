@@ -27,7 +27,7 @@ type Props = {
 
 const DropDownMenu = ({ items, onSelect }: Props) => {
   const menuSheetRef = React.useRef<BottomSheetModal>(null);
-  const snapPointsMenu = React.useMemo(() => ["60%"], []);
+  const snapPointsMenu = React.useMemo(() => ["50%"], []);
 
 
 
@@ -37,7 +37,7 @@ const DropDownMenu = ({ items, onSelect }: Props) => {
       {...props}
       disappearsOnIndex={-1}
       appearsOnIndex={0}
-      opacity={0.5}
+      opacity={0.2}
     />
   );
   return (
@@ -83,6 +83,7 @@ const DropDownMenu = ({ items, onSelect }: Props) => {
             ref={menuSheetRef}
             index={0}
             snapPoints={snapPointsMenu}
+            backdropComponent={renderBackdrop}
           >
             <BottomSheetView style={styles.contentContainer}>
               {items.map((item) => (

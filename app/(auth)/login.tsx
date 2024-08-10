@@ -20,17 +20,17 @@ const Login = () => {
         colors={[
           "rgba(255, 255, 255, 0.21)",
           "rgba(240, 232, 244, 0.43)",
-          "rgba(235, 225, 241, 0.99)",
+          "rgba(245, 225, 251, 1)",
           "rgba(240, 232, 244, 0.62)",
           "rgba(252, 251, 253, 0.14)",
-          "rgba(255, 255, 255, 0.00)",
+          "rgba(255, 255, 255, 0.2)",
         ]}
         start={[0.76, 0]}
         end={[0.58, 1]}
         style={StyleSheet.absoluteFill}
       />
       <LinearGradient
-        colors={["#FFF", "#D0EBFA", "#E8F2FB"]}
+        colors={["#FFF", "#E1F2FB", "#E8F2FB"]}
         start={[0, -0.0266]}
         end={[1, 0.9459]}
         style={StyleSheet.absoluteFill}
@@ -55,7 +55,7 @@ const Login = () => {
               placeholder="Phone number, username or email"
               style={{
                 backgroundColor: Colors[colorScheme ?? "light"].background,
-                paddingVertical: 16,
+                paddingVertical: 12,
                 paddingHorizontal: 10,
                 borderRadius: 12,
                 borderColor: Colors[colorScheme ?? "light"].tabIconDefault,
@@ -67,18 +67,20 @@ const Login = () => {
           <View
             style={{
               marginBottom: 10,
+              position: "relative",
             }}
           >
             <TextInput
-              placeholder="Phone number, username or email"
+              placeholder="Password"
               style={{
                 backgroundColor: Colors[colorScheme ?? "light"].background,
-                paddingVertical: 16,
+                paddingVertical: 12,
                 paddingHorizontal: 10,
                 borderRadius: 12,
                 borderColor: Colors[colorScheme ?? "light"].tabIconDefault,
                 borderWidth: 1,
               }}
+              secureTextEntry={true}
             />
           </View>
           {/* button */}
@@ -145,7 +147,7 @@ const Login = () => {
             }}
             underlayColor={Colors[colorScheme ?? "light"].defaultButton}
             onPress={() => {
-              router.push("/(auth)/register");
+              router.push("/(auth)/registers/emailSignup");
             }}
           >
             <Text
@@ -191,5 +193,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
     justifyContent: "center",
     width: "100%",
+    paddingVertical: 14,
   },
 });

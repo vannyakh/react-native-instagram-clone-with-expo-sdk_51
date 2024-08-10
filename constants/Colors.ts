@@ -15,6 +15,8 @@ export default {
     tabIconSelected: tintColorLight,
     defaultButton: '#EFEFEF',
     transparent: 'rgba(0,0,0,0)',
+    gray100: '#f7f7f7',
+    gray500: '#474747',
   },
   dark: {
     primaryColor: primaryColor,
@@ -26,5 +28,7 @@ export default {
     tabIconSelected: tintColorDark,
     defaultButton: '#333',
     transparent: 'rgba(0,0,0,0)',
+    gray100: '#f7f7f7',
+    gray500: '#494949',
   },
 };

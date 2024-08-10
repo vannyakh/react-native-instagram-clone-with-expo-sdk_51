@@ -17,7 +17,7 @@ const AuthLayout = () => {
         }}
       />
       <Stack.Screen
-        name="register"
+        name="registers/emailSignup"
         options={{
           headerShown: false,
         }}

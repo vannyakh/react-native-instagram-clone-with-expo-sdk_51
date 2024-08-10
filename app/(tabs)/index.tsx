@@ -206,7 +206,7 @@ export default function Home() {
                   <FontAwesome name="plus" size={13} color="#fff" />
                 </Pressable>
               </View>
-              <Text style={[styles.storyLabel, { color: "#999" }]}>story</Text>
+              <Text style={[styles.storyLabel, { color: Colors[colorScheme ?? 'light'].text }]}>story</Text>
             </TouchableOpacity>
             {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((item, index) => (
               <TouchableOpacity style={{ alignItems: "center" }} key={index}>
@@ -229,7 +229,7 @@ export default function Home() {
                     />
                   </View>
                 </LinearGradient>
-                <Text style={[styles.storyLabel, { color: "#999" }]}>
+                <Text style={[styles.storyLabel, { color: Colors[colorScheme ?? 'light'].gray500 }]}>
                   user{index}
                 </Text>
               </TouchableOpacity>
