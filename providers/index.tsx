@@ -5,9 +5,9 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { Redirect, router } from "expo-router";
 
 const AppProvider = ({ children }: { children: React.ReactNode }) => {
-  React.useEffect(() => {
-    router.push("/(auth)/login");
-  }, []);
+  // React.useEffect(() => {
+  //   router.push("/(auth)/login");
+  // }, []);
   return (
     <>
       <GestureHandlerRootView>

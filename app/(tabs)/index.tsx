@@ -24,6 +24,8 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 import { GlobleStyle } from "@/constants/GlobleStyle";
+import PagerView from "react-native-pager-view";
+import PostContain from "@/components/PostContain";
 
 export default function Home() {
   const colorScheme = useColorScheme();
@@ -206,7 +208,14 @@ export default function Home() {
                   <FontAwesome name="plus" size={13} color="#fff" />
                 </Pressable>
               </View>
-              <Text style={[styles.storyLabel, { color: Colors[colorScheme ?? 'light'].text }]}>story</Text>
+              <Text
+                style={[
+                  styles.storyLabel,
+                  { color: Colors[colorScheme ?? "light"].text },
+                ]}
+              >
+                story
+              </Text>
             </TouchableOpacity>
             {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((item, index) => (
               <TouchableOpacity style={{ alignItems: "center" }} key={index}>
@@ -229,13 +238,19 @@ export default function Home() {
                     />
                   </View>
                 </LinearGradient>
-                <Text style={[styles.storyLabel, { color: Colors[colorScheme ?? 'light'].gray500 }]}>
+                <Text
+                  style={[
+                    styles.storyLabel,
+                    { color: Colors[colorScheme ?? "light"].gray500 },
+                  ]}
+                >
                   user{index}
                 </Text>
               </TouchableOpacity>
             ))}
           </View>
         </ScrollView>
+
         {/* post */}
         <View
           style={{
@@ -294,25 +309,29 @@ export default function Home() {
                   <DropdownMenu onSelect={headleMenu} items={menus} />
                 </View>
               </View>
+              {/* post contain */}
               <View style={styles.imagePost}>
-                <TouchableOpacity
+                {/* <TouchableOpacity
                   style={{ position: "relative" }}
                   activeOpacity={1}
                   onPress={handleDoubleTap}
                 >
                   <View style={styles.loveLottis}>
-                    {/* <LottieView
+                    <LottieView
                       source={require("@/assets/lotties/love_3.json")}
                       autoPlay={true}
                       loop={true}
                       style={{ width: 200, height: 200 }}
-                    /> */}
+                    />
                   </View>
                   <Image
                     source={require("@/assets/images/posts/post-6.jpg")}
                     style={{ width: "100%", height: 400 }}
                   />
-                </TouchableOpacity>
+                  
+                </TouchableOpacity> */}
+                {/* <PostContain /> */}
+                
               </View>
               <View
                 style={{
@@ -364,6 +383,7 @@ export default function Home() {
           ))}
         </View>
       </ScrollView>
+      
     </View>
   );
 }
