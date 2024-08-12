@@ -147,7 +147,7 @@ const Account = () => {
                     borderRadius: 90,
                     overflow: "hidden",
                     borderColor: "white",
-                    borderWidth: 2,
+                    borderWidth: 4,
                   }}
                 >
                   <Image
