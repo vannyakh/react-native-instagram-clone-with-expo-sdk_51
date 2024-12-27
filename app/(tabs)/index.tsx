@@ -8,6 +8,9 @@ import {
   Animated,
   useWindowDimensions,
   Platform,
+   PanResponder,
+   Modal,
+   Button,
 } from "react-native";
 import { Text, View } from "@/components/Themed";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -17,7 +20,7 @@ import Colors from "@/constants/Colors";
 import { FontAwesome } from "@expo/vector-icons";
 import DropdownMenu from "@/components/dropdown-menu";
 import { router } from "expo-router";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import LottieView from "lottie-react-native";
 import {
   widthPercentageToDP as wp,
@@ -29,6 +32,8 @@ import PostContain from "@/components/PostContain";
 
 export default function Home() {
   const colorScheme = useColorScheme();
+    const [modalVisible, setModalVisible] = useState(false);
+  const pan = useRef(new Animated.ValueXY()).current;
   const bounceValue = useRef(new Animated.Value(1)).current;
   const lastTapTimeRef = useRef(0);
   const { width, height } = useWindowDimensions();
@@ -117,6 +122,38 @@ export default function Home() {
       lastTapTimeRef.current = now;
     }
   };
+
+  const panResponder = useRef(
+    
+    PanResponder.create({
+      onMoveShouldSetPanResponder: (evt, gestureState) => true,
+      onPanResponderMove: Animated.event(
+        [
+          null,
+          { dy: pan.y }
+        ],
+        { useNativeDriver: false }
+      ),
+      onPanResponderRelease: (evt, gestureState) => {
+    
+        if (gestureState.dy > 150) {
+          Animated.timing(pan, {
+            toValue: { x: 0, y: 1000 },
+            duration: 300,
+            useNativeDriver: true,
+          }).start(() => {
+            setModalVisible(false);
+            pan.setValue({ x: 0, y: 0 });
+          });
+        } else {
+          Animated.spring(pan, {
+            toValue: { x: 0, y: 0 },
+            useNativeDriver: true,
+          }).start();
+        }
+      },
+    })
+  ).current;
 
   return (
     <View style={[styles.container]}>
@@ -218,7 +255,9 @@ export default function Home() {
               </Text>
             </TouchableOpacity>
             {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((item, index) => (
-              <TouchableOpacity style={{ alignItems: "center" }} key={index}>
+              <TouchableOpacity style={{ alignItems: "center" }} key={index} 
+              onPress={() => setModalVisible(true)}
+              >
                 <LinearGradient
                   colors={["#C913B9", "#F9373F", "#FECD00"]}
                   end={{ x: 0.1, y: 1 }}
@@ -383,6 +422,23 @@ export default function Home() {
           ))}
         </View>
       </ScrollView>
+      <Modal
+        animationType="none"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => setModalVisible(false)}
+      >
+        <View style={styles.modalBackground}>
+          <Animated.View
+            style={[styles.modalView, { transform: pan.getTranslateTransform() }]}
+            {...panResponder.panHandlers}
+          >
+            <Text>Swipe down to close this modal</Text>
+            <Text>This is the content of the modal.</Text>
+            <Button title="Close Modal" onPress={() => setModalVisible(false)} />
+          </Animated.View>
+        </View>
+      </Modal>
       
     </View>
   );
@@ -455,5 +511,18 @@ const styles = StyleSheet.create({
     zIndex: 2,
     top: 0,
     backgroundColor: "transparent",
+  },
+  modalBackground: {
+    width: "100%",
+    height: "100%",
+    flex: 1,
+    flexDirection: 'column',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
+  modalView: {
+    flex: 1,
+    backgroundColor: 'white',
+    borderRadius: 10,
+    alignItems: 'center',
   },
 });
